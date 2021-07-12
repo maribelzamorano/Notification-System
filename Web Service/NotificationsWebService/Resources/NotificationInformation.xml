@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sqlMap
+	namespace="NotificationInformation"
+		xmlns="http://ibatis.apache.org/mapping"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" >
+	<alias>
+		<typeAlias alias="bobjNotificationInformation" type="com.topdev.aa.data.bobjNotificationInformation" />
+	</alias>
+
+
+	<resultMaps>
+		<resultMap id="SelectResult" class="bobjNotificationInformation">
+			<result property="notificationId"			column="NOTF_ID" />
+			<result property="notificationInformation"	column="NOTF_INFORMATION" />
+			<result property="subscriptionId"			column="SBPN_ID" />
+			<result property="subscriberId"				column="SBER_ID" />
+			<result property="deviceId"					column="DEVC_ID" />
+			<result property="deviceAddress"			column="DEVC_ADDRESS" />
+			<result property="subscriptionTypeCode"		column="SBTP_CODE" />
+			<result property="subscriptionTypeDecode"		column="SBTP_DECODE" />
+			<result property="subscriptionTypeEmailAddress" column="SBTP_EMAILADR" />
+			<result property="subscriptionTypeReplyAddress" column="SBTP_EMAILREPLYADR" />
+			<result property="subscriptionTypeEmailCc"		column="SBTP_EMAILCC"/>
+			<result property="subscriptionTypeEmailBcc"		column="SBTP_EMAILBCC"/>
+			<result property="subscriptionTypeEmailSubject" column="SBTP_EMAILSUB" />
+			<result property="notificationEventEmailCc"		column="NFEV_EMAILCC"/>
+			<result property="notificationEventEmailBcc"	column="NFEV_EMAILBCC"/>
+			<result property="communicationMethodCode"	column="CMMD_CODE" />
+			<result property="communicationMethodDecode"	column="CMMD_DECODE" />
+		</resultMap>
+	</resultMaps>
+	
+	<statements>
+
+			<select id="NotificationInformation.Select" resultMap="SelectResult" >
+				select
+				convert(nvarchar(255),NOTF_ID) as NOTF_ID,
+				NOTF_INFORMATION,
+				convert(nvarchar(255),SBPN_ID) as SBPN_ID,
+				convert(nvarchar(255),SBER_ID) as SBER_ID,
+				convert(nvarchar(255),DEVC_ID) as DEVC_ID,
+				DEVC_ADDRESS,
+				convert(nvarchar(255),SBTP_CODE) as SBTP_CODE,
+				SBTP_DECODE,
+				SBTP_EMAILADR,
+				SBTP_EMAILREPLYADR,
+				SBTP_EMAILCC,
+				SBTP_EMAILBCC,
+				SBTP_EMAILSUB,
+				NFEV_EMAILCC,
+				NFEV_EMAILBCC,
+				convert(nvarchar(255),CMMD_CODE) as CMMD_CODE,
+				CMMD_DECODE
+				from notifadm.V_NOTIFICATION_INFORMATION
+			</select>
+		
+	</statements>
+
+</sqlMap>
+
+

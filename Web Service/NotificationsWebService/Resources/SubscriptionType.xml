@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sqlMap
+	namespace="SubscriptionType"
+		xmlns="http://ibatis.apache.org/mapping"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" >
+
+	<alias>
+		<typeAlias alias="bobjSubscriptionType" type="com.topdev.aa.data.bobjSubscriptionType" />
+	</alias>
+
+	<resultMaps>
+		<resultMap id="SelectResult" class="bobjSubscriptionType">
+			<result property="subscriptionTypeId"			column="SBTP_ID" />
+			<result property="subscriptionTypeCode"			column="SBTP_CODE" />
+			<result property="subscriptionTypeDecode"		column="SBTP_DECODE" />
+			<result property="subscriptionTypeConditions"	column="SBTP_CONDITIONS" />
+			<result property="subscriptionTypeFields"	    column="SBTP_FIELDS" />
+			<result property="subscriptionTypeEmailAddress" column="SBTP_EMAILADR" />
+			<result property="subscriptionTypeReplyAddress" column="SBTP_EMAILREPLYADR" />
+			<result property="subscriptionTypeEmailCc"		column="SBTP_EMAILCC"/>
+			<result property="subscriptionTypeEmailBcc"		column="SBTP_EMAILBCC"/>
+			<result property="subscriptionTypeEmailSubject" column="SBTP_EMAILSUB" />
+
+		</resultMap>
+	</resultMaps>
+
+	<parameterMaps>
+		<parameterMap id="params" class="bobjSubscriptionType" >
+			<parameter property="sessionId"						column="SESSION_ID"/>
+			<parameter property="user"							column="USER"/>
+			<parameter property="subscriptionTypeId" column="SBTP_ID" 
+					   direction="InputOutput" typeHandler="com.topdev.aa.lib.ibatis.StringToInt"/>
+			<parameter property="orgUser"						column="SBTP_USER"/>
+			<parameter property="orgXPts"						column="SBTP_XPTS"/>
+			<parameter property="actionCode"					column="AAKT_CODE"/>
+			<parameter property="subscriptionTypeCode"			column="SBTP_CODE"/>
+			<parameter property="subscriptionTypeDecode"		column="SBTP_DECODE"/>
+			<parameter property="subscriptionTypeConditions"	column="SBTP_CONDITIONS" />
+			<parameter property="subscriptionTypeFields"		column="SBTP_FIELDS" />
+			<parameter property="subscriptionTypeEmailAddress"	column="SBTP_EMAILADR"/>
+			<parameter property="subscriptionTypeReplyAddress"	column="SBTP_EMAILREPLYADR"/>
+			<parameter property="subscriptionTypeEmailCc"		column="SBTP_EMAILCC"/>
+			<parameter property="subscriptionTypeEmailBcc"		column="SBTP_EMAILBCC"/>
+			<parameter property="subscriptionTypeEmailSubject"	column="SBTP_EMAILSUB"/>
+			<parameter property="kzUseTransaction"			column="KZ_USE_TRANSACTION"/>
+			<parameter property="debug"					column="DEBUG"/>
+		</parameterMap>
+	</parameterMaps>
+	
+	<statements>
+
+		<select id="SubscriptionType.Select" resultMap="SelectResult" parameterClass="int">
+			select
+			convert(nvarchar(255),SBTP_ID) SBTP_ID,
+			SBTP_CODE,
+			SBTP_DECODE,
+			SBTP_CONDITIONS,
+			SBTP_FIELDS,
+			SBTP_EMAILADR,
+			SBTP_EMAILREPLYADR,
+			SBTP_EMAILCC,
+			SBTP_EMAILBCC,
+			SBTP_EMAILSUB
+			from notifadm.T_SUBSCRIPTION_TYPE
+			<dynamic prepend="WHERE">
+				<isParameterPresent>
+					SBTP_ID = #value#
+				</isParameterPresent>
+			</dynamic>
+		</select>
+		
+		<procedure id="SubscriptionType.IUDProcedure" parameterMap="params">
+			notifadm.pss_SBTP_IUD
+		</procedure>
+	</statements>
+
+</sqlMap>

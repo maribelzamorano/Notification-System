@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<sqlMap
+	namespace="Attachments"
+		xmlns="http://ibatis.apache.org/mapping"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" >
+
+
+	<alias>
+		<typeAlias alias="bobjAttachments" type="com.topdev.aa.data.bobjAttachments" />
+	</alias>
+
+	<resultMaps>
+		<resultMap id="SelectResult" class="bobjAttachments">
+			<result property="anlaId" column="ANLA_ID" typeHandler="com.topdev.aa.lib.ibatis.StringToInt"/>
+			<result property="anlaName" column="ANLA_NAME" />
+			<result property="anlaDatei" column="ANLA_DATEI" />
+		</resultMap>
+	</resultMaps>
+	<parameterMaps>
+		<parameterMap id="params" class="bobjAttachments">
+			<parameter property="sessionId"  column="SESSION_ID"/>
+			<parameter property="user"  column="USER" />
+			<parameter property="anlaId"	column="ANLA_ID" typeHandler="com.topdev.aa.lib.ibatis.StringToInt"/>
+			<parameter property="debug"	column="DEBUG"/>
+		</parameterMap>
+	</parameterMaps>
+
+
+	<statements>
+
+		<procedure id="GetFile.IUDProcedure" parameterMap="params" resultMap="SelectResult">
+			SVC05O.services.pss_ANLA_Download
+		</procedure>
+		
+	</statements>
+
+</sqlMap>

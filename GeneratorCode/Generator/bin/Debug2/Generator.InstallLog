@@ -1,0 +1,21 @@
+﻿Installing assembly 'C:\Users\Renato\Desktop\Notifications\Generator\Generator\bin\Debug2\Generator.exe'.
+Affected parameters are:
+   logtoconsole = 
+   assemblypath = C:\Users\Renato\Desktop\Notifications\Generator\Generator\bin\Debug2\Generator.exe
+   logfile = C:\Users\Renato\Desktop\Notifications\Generator\Generator\bin\Debug2\Generator.InstallLog
+Installing service GeneratorService...
+Service GeneratorService has been successfully installed.
+Creating EventLog source GeneratorService in log Application...
+Committing assembly 'C:\Users\Renato\Desktop\Notifications\Generator\Generator\bin\Debug2\Generator.exe'.
+Affected parameters are:
+   logtoconsole = 
+   assemblypath = C:\Users\Renato\Desktop\Notifications\Generator\Generator\bin\Debug2\Generator.exe
+   logfile = C:\Users\Renato\Desktop\Notifications\Generator\Generator\bin\Debug2\Generator.InstallLog
+Uninstalling assembly 'C:\Users\Renato\Desktop\Notifications\Generator\Generator\bin\Debug2\Generator.exe'.
+Affected parameters are:
+   logtoconsole = 
+   assemblypath = C:\Users\Renato\Desktop\Notifications\Generator\Generator\bin\Debug2\Generator.exe
+   logfile = C:\Users\Renato\Desktop\Notifications\Generator\Generator\bin\Debug2\Generator.InstallLog
+Removing EventLog source GeneratorService.
+Service GeneratorService is being removed from the system...
+Service GeneratorService was successfully removed from the system.

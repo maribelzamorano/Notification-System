@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sqlMap namespace="LogServiceGenerator"
+		xmlns="http://ibatis.apache.org/mapping"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" >
+
+	<alias>
+		<typeAlias alias="bobjLogServiceGenerator" type="com.topdev.aa.data.bobjLogServiceGenerator" />
+	</alias>
+
+	<resultMaps>
+		<resultMap id="SelectResult" class="bobjLogServiceGenerator">
+			<result property="logServiceGeneratorId" column="LSGE_ID" />
+			<result property="logServiceGeneratorStartTime" column="LSGE_STARTTIME" />
+			<result property="logServiceGeneratorEndTime" column="LSGE_ENDTIME" />
+			<result property="logServiceGeneratorRc" column="LSGE_RC" />
+			<result property="logServiceGeneratorRcText" column="LSGE_RC_TEXT" />
+		</resultMap>
+		
+	</resultMaps>
+
+	<parameterMaps>
+		<parameterMap id="params" class="bobjLogServiceGenerator" >
+			<parameter property="sessionId"		column="SESSION_ID"/>
+			<parameter property="user"			column="USER"/>
+			<parameter property="logServiceGeneratorId"	column="LSGE_ID" typeHandler="com.topdev.aa.lib.ibatis.StringToInt"/>
+			<parameter property="orgUser"		column="LSGE_USER"/>
+			<parameter property="orgXPts"		column="LSGE_XPTS"/>
+			<parameter property="actionCode"	column="AAKT_CODE"/>
+			<parameter property="logServiceGeneratorStartTime" column="LSGE_STARTTIME" />
+			<parameter property="logServiceGeneratorEndTime" column="LSGE_ENDTIME" />
+			<parameter property="logServiceGeneratorRc"		column="LSGE_RC" typeHandler="com.topdev.aa.lib.ibatis.StringToInt" />
+			<parameter property="logServiceGeneratorRcText" column="LSGE_RC_TEXT" />
+			<parameter property="kzUseTransaction"		column="KZ_USE_TRANSACTION"/>
+			<parameter property="debug"				column="DEBUG"/>
+		</parameterMap>
+	</parameterMaps>
+
+	<statements>
+
+		<select id="LogServiceGenerator.Select" resultMap="SelectResult">
+			select
+			convert(nvarchar(255),LSGE_ID) LGSE_ID,
+			convert(nvarchar(255),LSGE_STARTTIME) LSGE_STARTTIME,
+			convert(nvarchar(255),LSGE_ENDTIME) LSGE_ENDTIME,
+			convert(nvarchar(255),LSGE_RC) LSGE_RC,
+			LSGE_RC_TEXT
+			from notifadm.T_LOGSERVICEGENERATOR
+			<dynamic prepend="WHERE">
+				<isParameterPresent>
+					LSGE_ID = #value#
+				</isParameterPresent>
+			</dynamic>
+		</select>
+
+		<procedure id="LogServiceGenerator.IUDProcedure" parameterMap="params">
+			notifadm.pss_LSGE_IUD
+		</procedure>
+
+
+	</statements>
+
+</sqlMap>

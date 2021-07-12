@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sqlMap
+	namespace="EventType"
+		xmlns="http://ibatis.apache.org/mapping"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" >
+
+	<alias>
+		<typeAlias alias="bobjEventType" type="com.topdev.aa.data.bobjEventType" />
+	</alias>
+
+	<resultMaps>
+		<resultMap id="SelectResult" class="bobjEventType">
+      <result property="eventTypeId" column="EVTP_ID" />
+			<result property="eventTypeCode" column="EVTP_CODE" />
+			<result property="eventTypeDecode" column="EVTP_DECODE" />
+			<result property="businessTableName" column="EVTP_BTABLE" />
+			<result property="bussinesTableId" column="EVTP_IDBTABLE" />
+		</resultMap>
+	</resultMaps>
+
+	<parameterMaps>
+		<parameterMap id="params" class="bobjEventType" >
+			<parameter property="sessionId"						column="SESSION_ID"/>
+			<parameter property="user"							column="USER"/>
+		    <parameter property="eventTypeId"			        column="EVTP_ID" typeHandler="com.topdev.aa.lib.ibatis.StringToInt"/>
+			<parameter property="orgUser"						column="EVTP_USER"/>
+			<parameter property="orgXPts"						column="EVTP_XPTS"/>
+			<parameter property="actionCode"					column="AAKT_CODE"/>
+			<parameter property="eventTypeCode"					column="EVTP_CODE" typeHandler="com.topdev.aa.lib.ibatis.StringToInt"/>
+			<parameter property="eventTypeDecode"				column="EVTP_DECODE" />
+			<parameter property="businessTableName"				column="EVTP_BTABLE" />
+			<parameter property="bussinesTableId"				column="EVTP_IDBTABLE" />
+			<parameter property="kzUseTransaction"			column="KZ_USE_TRANSACTION"/>
+			<parameter property="debug"					column="DEBUG"/>
+		</parameterMap>
+	</parameterMaps>
+	
+	<statements>
+
+		<select id="EventType.Select" resultMap="SelectResult" parameterClass="int">
+      select
+      convert(nvarchar(255),EVTP_ID) EVTP_ID,
+      convert(nvarchar(255),EVTP_CODE) EVTP_CODE,
+      EVTP_DECODE,
+      EVTP_BTABLE,
+      EVTP_IDBTABLE
+      from notifadm.T_EVENT_TYPE
+      <dynamic prepend="WHERE">
+				<isParameterPresent>
+					EVTP_ID = #value#
+				</isParameterPresent>
+			</dynamic>
+		</select>
+		
+		
+		
+		<procedure id="EventType.IUDProcedure" parameterMap="params">
+			notifadm.pss_EVTP_IUD
+		</procedure>
+	</statements>
+
+</sqlMap>

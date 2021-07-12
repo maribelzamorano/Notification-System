@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<sqlMap
+	namespace="Subscriber"
+		xmlns="http://ibatis.apache.org/mapping"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" >
+
+
+
+	<alias>
+		<typeAlias alias="bobjSubscriber" type="com.topdev.aa.data.bobjSubscriber" />
+	</alias>
+
+	<resultMaps>
+		<resultMap id="SelectResult" class="bobjSubscriber">
+			<result property="subscriberId" column="SBER_ID" />
+			<result property="userId" column="USER_ID" />
+			<result property="orgUser"  column="SBER_USER" />
+			<result property="orgXPts"  column="SBER_#PTS" />
+		</resultMap>
+		<resultMap id="ProcResult" class="bobjSubscriber">
+			<result property="subscriberId" column="SBER_ID" typeHandler="com.topdev.aa.lib.ibatis.StringToInt"/>
+		</resultMap>
+	</resultMaps>
+	<parameterMaps>
+		<parameterMap id="params" class="bobjSubscriber">
+			<parameter property="sessionId"  column="SESSION_ID"/>
+			<parameter property="user"  column="USER" />
+			<parameter property="subscriberId" column="SBER_ID" direction="InputOutput" typeHandler="com.topdev.aa.lib.ibatis.StringToInt"/>
+			<parameter property="orgUser"  column="SBER_USER" />
+			<parameter property="orgXPts"  column="SBER_XPTS" />
+			<parameter property="actionCode"  column="AAKT_CODE" />
+			<parameter property="userId" column="USER_ID" />
+			<parameter property="kzUseTransaction"	column="KZ_USE_TRANSACTION"/>
+			<parameter property="debug"	column="DEBUG"/>
+		</parameterMap>
+	</parameterMaps>
+
+	<statements>
+
+		<select id="Subscriber.Select" parameterClass="int" resultMap="SelectResult">
+			select
+			convert(nvarchar(255),SBER_ID) as SBER_ID,
+			convert(nvarchar(255),USER_ID) as USER_ID,
+			convert(nvarchar(255),SBER_USER) as SBER_USER,
+			convert(nvarchar(255),SBER_##PTS) as SBER_##PTS
+			from notifadm.T_SUBSCRIBER
+			<dynamic prepend="WHERE">
+				<isParameterPresent>
+					SBER_ID=#value#
+				</isParameterPresent>
+			</dynamic>
+		</select>
+
+		<select id="Subscriber.Exists" parameterClass="int" resultMap="SelectResult">
+			select
+			convert(nvarchar(255),SBER_ID) as SBER_ID,
+			convert(nvarchar(255),USER_ID) as USER_ID,
+			convert(nvarchar(255),SBER_USER) as SBER_USER,
+			convert(nvarchar(255),SBER_##PTS) as SBER_##PTS
+			from notifadm.T_SUBSCRIBER
+			<dynamic prepend="WHERE">
+				<isParameterPresent>
+					USER_ID=#value#
+				</isParameterPresent>
+			</dynamic>
+		</select>
+
+		<procedure id="Subscriber.IUDProcedure" parameterMap="params" resultMap="ProcResult">
+			notifadm.pss_SBER_IUD
+		</procedure>
+	</statements>
+
+
+</sqlMap>

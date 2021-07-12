@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sqlMap
+	namespace="EventSubscriptionType"
+		xmlns="http://ibatis.apache.org/mapping"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" >
+
+	<alias>
+		<typeAlias alias="bobjEventSubscriptionType" type="com.topdev.aa.data.bobjEventSubscriptionType" />
+	</alias>
+
+	<resultMaps>
+		<resultMap id="SelectResult" class="bobjEventSubscriptionType">
+			<result property="eventSubscriptionTypeId" column="EVST_ID" />
+			<result property="subscriptionTypeCode" column="SBTP_CODE" />
+			<result property="eventTypeCode" column="EVTP_CODE" />
+		</resultMap>
+	</resultMaps>
+
+	<parameterMaps>
+		<parameterMap id="params" class="bobjEventSubscriptionType" >
+			<parameter property="sessionId"						column="SESSION_ID"/>
+			<parameter property="user"							column="USER"/>
+			<parameter property="eventSubscriptionTypeId"		column="EVST_ID" typeHandler="com.topdev.aa.lib.ibatis.StringToInt"/>
+			<parameter property="orgUser"						column="EVST_USER"/>
+			<parameter property="orgXPts"						column="EVST_XPTS"/>
+			<parameter property="actionCode"					column="AAKT_CODE"/>
+			<parameter property="subscriptionTypeCode"	    	column="SBTP_CODE"/>
+			<parameter property="eventTypeCode"					column="EVTP_CODE"/>
+			<parameter property="kzUseTransaction"			column="KZ_USE_TRANSACTION"/>
+			<parameter property="debug"					column="DEBUG"/>
+		</parameterMap>
+	</parameterMaps>
+	
+	<statements>
+
+		<select id="EventSubscriptionType.Select" resultMap="SelectResult" parameterClass="int">
+			select
+			convert(nvarchar(255),EVST_ID) EVST_ID,
+			convert(nvarchar(255),SBTP_CODE) SBTP_CODE,
+			convert(nvarchar(255),EVTP_CODE) EVTP_CODE
+			from notifadm.T_EVENT_SUBSCRIPTION_TYPE
+			<dynamic prepend="WHERE">
+				<isParameterPresent>
+					EVST_ID = #value#
+				</isParameterPresent>
+			</dynamic>
+		</select>
+		
+		<procedure id="EventSubscriptionType.IUDProcedure" parameterMap="params">
+			notifadm.pss_EVST_IUD
+		</procedure>
+	</statements>
+
+</sqlMap>

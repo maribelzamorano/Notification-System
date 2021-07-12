@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sqlMap namespace="CommunicationMethod"
+		xmlns="http://ibatis.apache.org/mapping"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" >
+
+	<alias>
+		<typeAlias alias="bobjCommunicationMethod" type="com.topdev.aa.data.bobjCommunicationMethod" />
+	</alias>
+
+	<resultMaps>
+		<resultMap id="SelectResult" class="bobjCommunicationMethod">
+      <result property="communicationMethodId" column="CMMD_ID" />
+			<result property="communicationMethodCode" column="CMMD_CODE" />
+			<result property="communicationMethodDecode" column="CMMD_DECODE" />
+		</resultMap>
+	</resultMaps>
+
+	<parameterMaps>
+		<parameterMap id="params" class="bobjCommunicationMethod" >
+			<parameter property="sessionId"		column="SESSION_ID"/>
+			<parameter property="user"			column="USER"/>
+      <parameter property="communicationMethodId" column="CMMD_ID" />
+			<parameter property="communicationMethodCode"	column="CMMD_CODE" typeHandler="com.topdev.aa.lib.ibatis.StringToInt"/>
+			<parameter property="orgUser"		column="CMMD_USER"/>
+			<parameter property="orgXPts"		column="CMMD_XPTS"/>
+			<parameter property="actionCode"	column="AAKT_CODE"/>
+			<parameter property="communicationMethodDecode" column="CMMD_DECODE" />
+			<parameter property="kzUseTransaction"			column="KZ_USE_TRANSACTION"/>
+			<parameter property="debug"					column="DEBUG"/>
+		</parameterMap>
+	</parameterMaps>
+
+	<statements>
+
+		<select id="CommunicationMethod.Select" resultMap="SelectResult">
+      select
+      convert(nvarchar(255),CMMD_ID) CMMD_ID,
+      convert(nvarchar(255),CMMD_CODE) CMMD_CODE,
+      CMMD_DECODE
+      from notifadm.T_COMMUNICATION_METHOD
+      <dynamic prepend="WHERE">
+				<isParameterPresent>
+					CMMD_ID = #value#
+				</isParameterPresent>
+			</dynamic>
+		</select>
+
+		<procedure id="CommunicationMethod.IUDProcedure" parameterMap="params">
+			notifadm.pss_CMMD_IUD
+		</procedure>
+
+
+	</statements>
+
+</sqlMap>

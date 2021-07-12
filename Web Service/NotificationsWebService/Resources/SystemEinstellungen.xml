@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="SubscriptionType"
+		xmlns="http://ibatis.apache.org/mapping"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+
+	<statements>
+		<sql id="SystemEinstellungen.SelectFragment">
+			select SYEI_VALUE
+			from akkradm.V_SYSTEMEINSTELLUNGEN_GLOBAL
+		</sql>
+
+		<select id="SystemEinstellungen.SelectServer" resultClass="string">
+			<include refid="SystemEinstellungen.SelectFragment"/>
+			where SYEI_CODE = 'mail_smtp'
+		</select>
+
+		<select id="SystemEinstellungen.SelectUser" resultClass="string">
+			<include refid="SystemEinstellungen.SelectFragment"/>
+			where SYEI_CODE = 'mail_user'
+		</select>
+
+		<select id="SystemEinstellungen.SelectPassw" resultClass="string">
+			<include refid="SystemEinstellungen.SelectFragment"/>
+			where SYEI_CODE = 'mail_passw'
+		</select>
+	</statements>
+	
+	
+</sqlMap>

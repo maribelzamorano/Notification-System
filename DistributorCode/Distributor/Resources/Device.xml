@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sqlMap namespace="Device"
+		xmlns="http://ibatis.apache.org/mapping"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" >
+	<alias>
+		<typeAlias alias="bobjDevice" type="com.topdev.aa.data.bobjDevice" />
+	</alias>
+
+	<resultMaps>
+		<resultMap id="SelectResult" class="bobjDevice">
+			<result property="deviceId" column="DEVC_ID"  />
+			<result property="subscriberId" column="SBER_ID" />
+			<result property="communicationMethodCode" column="CMMD_CODE" />
+			<result property="deviceAddress" column="DEVC_ADDRESS" />
+			<result property="orgUser" column="DEVC_USER"/>
+			<result property="orgXPts" column="DEVC_#PTS"/>
+		</resultMap>
+
+		<resultMap id="ProcResult" class="bobjDevice">
+			<result property="deviceId" column="DEVC_ID" typeHandler="com.topdev.aa.lib.ibatis.StringToInt" />
+		</resultMap>
+		
+	</resultMaps>
+	
+
+	<parameterMaps>
+		<parameterMap id="params" class="bobjDevice" >
+			<parameter property="sessionId"		column="SESSION_ID"/>
+			<parameter property="user"			column="USER"/>
+			<parameter property="deviceId"		direction="InputOutput" column="DEVC_ID" typeHandler="com.topdev.aa.lib.ibatis.StringToInt"/>
+			<parameter property="orgUser"		column="DEVC_USER"/>
+			<parameter property="orgXPts"		column="DEVC_XPTS"/>
+			<parameter property="actionCode"	column="AAKT_CODE"/>
+			<parameter property="subscriberId"	column="SBER_ID"/>
+			<parameter property="communicationMethodCode"		column="CMMD_CODE"/>
+			<parameter property="deviceAddress"	column="DEVC_ADDRESS"/>
+			<parameter property="kzUseTransaction"	column="KZ_USE_TRANSACTION"/>
+			<parameter property="debug"	column="DEBUG"/>
+
+		</parameterMap>
+	</parameterMaps>
+
+	<statements>
+
+		<select id="getDevicesBySubscriberId" resultMap="SelectResult" parameterClass="int">
+			select
+			convert(nvarchar(255),DEVC_ID) as DEVC_ID,
+			convert(nvarchar(255),SBER_ID) as SBER_ID,
+			convert(nvarchar(255),CMMD_CODE) as CMMD_CODE,
+			DEVC_ADDRESS,
+			DEVC_USER,
+			convert(nvarchar(255),DEVC_##PTS) as DEVC_##PTS
+			from notifadm.T_DEVICE
+			<dynamic prepend="WHERE">
+			<isParameterPresent>
+				SBER_ID = #value#
+			</isParameterPresent>
+		</dynamic>
+		</select>
+
+		<select id="Device.Select" resultMap="SelectResult" parameterClass="int">
+			select
+			convert(nvarchar(255),DEVC_ID) as DEVC_ID,
+			convert(nvarchar(255),SBER_ID) as SBER_ID,
+			convert(nvarchar(255),CMMD_CODE) as CMMD_CODE,
+			DEVC_ADDRESS,
+			DEVC_USER,
+			convert(nvarchar(255),DEVC_##PTS) as DEVC_##PTS
+			from notifadm.T_DEVICE
+			<dynamic prepend="WHERE">
+				<isParameterPresent>
+					DEVC_ID = #value#
+				</isParameterPresent>
+			</dynamic>
+		</select>
+
+		<select id="Device.Exists" parameterClass="bobjDevice" resultMap="SelectResult">
+			select
+			convert(nvarchar(255),DEVC_ID) as DEVC_ID,
+			convert(nvarchar(255),SBER_ID) as SBER_ID,
+			convert(nvarchar(255),CMMD_CODE) as CMMD_CODE,
+			DEVC_ADDRESS,
+			DEVC_USER,
+			convert(nvarchar(255),DEVC_##PTS) as DEVC_##PTS
+			from notifadm.T_DEVICE
+			<dynamic prepend="WHERE">
+				<isParameterPresent>
+					SBER_ID=#subscriberId# and
+					DEVC_ADDRESS=#deviceAddress# and
+					CMMD_CODE=#communicationMethodCode#
+				</isParameterPresent>
+			</dynamic>
+		</select>
+
+
+		<procedure id="Device.IUDProcedure" parameterMap="params" resultMap="ProcResult">
+			notifadm.pss_DEVC_IUD
+		</procedure>
+		
+		
+	</statements>
+	
+</sqlMap>

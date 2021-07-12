@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+
+<sqlMap
+	namespace="SubscriptionInformation"
+		xmlns="http://ibatis.apache.org/mapping"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" >
+
+
+
+	<alias>
+		<typeAlias alias="bobjSubscriptionInformation" type="com.topdev.aa.data.bobjSubscriptionInformation" />
+	</alias>
+
+	<resultMaps>
+		<resultMap id="SelectResult" class="bobjSubscriptionInformation">
+			<result property="subscriptionId" column="SBPN_ID" />
+			<result property="subscriptionParameters" column="SBPN_PARAMETERS" />
+			<result property="subscriberId" column="SBER_ID" />
+			<result property="deviceId" column="DEVC_ID" />
+			<result property="deviceAddress" column="DEVC_ADDRESS" />
+			<result property="communicationMethodCode" column="CMMD_CODE" />
+			<result property="subscriptionTypeCode" column="SBTP_CODE" />
+			<result property="subscriptionTypeFields" column="SBTP_FIELDS" />
+			<result property="subscriptionTypeEmailAddress" column="SBTP_EMAILADR" />
+			<result property="subscriptionTypeEmailCc"		column="SBTP_EMAILCC" />
+			<result property="subscriptionTypeEmailBcc"		column="SBTP_EMAILBCC" />
+			<result property="subscriptionTypeReplyAddress"	column="SBTP_EMAILREPLYADR"/>
+			<result property="subscriptionTypeEmailSubject" column="SBTP_EMAILSUB" />
+			<result property="eventTypeCode" column="EVTP_CODE" />
+			<result property="businessTableName" column="EVTP_BTABLE" />
+			<result property="bussinesTableId" column="EVTP_IDBTABLE" />
+			<result property="subscriptionTypeConditions" column="SBTP_CONDITIONS" />
+		</resultMap>
+	</resultMaps>
+
+
+	<statements>
+
+		<select id="SubscriptionInformation.Select" parameterClass="int" resultMap="SelectResult">
+			select
+			convert(nvarchar(255),SBPN_ID) SBPN_ID,
+			SBPN_PARAMETERS,
+			convert(nvarchar(255),SBER_ID) SBER_ID,
+			convert(nvarchar(255),DEVC_ID) DEVC_ID,
+			DEVC_ADDRESS,
+			convert(nvarchar(255),CMMD_CODE) CMMD_CODE,
+			convert(nvarchar(255),SBTP_CODE) SBTP_CODE,
+			SBTP_FIELDS,
+			SBTP_EMAILADR,
+			SBTP_EMAILCC,
+			SBTP_EMAILBCC,
+			SBTP_EMAILREPLYADR,
+			SBTP_EMAILSUB,
+			convert(nvarchar(255),EVTP_CODE) EVTP_CODE,
+			EVTP_BTABLE,
+			EVTP_IDBTABLE,
+			SBTP_CONDITIONS
+			from notifadm.V_SUBSCRIPTION_INFORMATION
+			<dynamic prepend="WHERE">
+				<isParameterPresent>
+					EVTP_CODE=#value#
+				</isParameterPresent>
+			</dynamic>
+
+		</select>
+
+		<select id="SubscriptionInformation.SelectUser" parameterClass="bobjNotificationEvent" resultMap="SelectResult">
+			select
+			convert(nvarchar(255),SBPN_ID) SBPN_ID,
+			SBPN_PARAMETERS,
+			convert(nvarchar(255),SBER_ID) SBER_ID,
+			convert(nvarchar(255),DEVC_ID) DEVC_ID,
+			DEVC_ADDRESS,
+			convert(nvarchar(255),CMMD_CODE) CMMD_CODE,
+			convert(nvarchar(255),SBTP_CODE) SBTP_CODE,
+			SBTP_FIELDS,
+			SBTP_EMAILADR,
+			SBTP_EMAILCC,
+			SBTP_EMAILBCC,
+			SBTP_EMAILREPLYADR,
+			SBTP_EMAILSUB,
+			convert(nvarchar(255),EVTP_CODE) EVTP_CODE,
+			EVTP_BTABLE,
+			EVTP_IDBTABLE,
+			SBTP_CONDITIONS
+			from notifadm.V_SUBSCRIPTION_INFORMATION
+			<dynamic prepend="WHERE">
+				<isParameterPresent>
+					EVTP_CODE=#eventTypeCode# and
+					USER_ID=#userId#
+				</isParameterPresent>
+			</dynamic>
+
+		</select>
+
+
+	</statements>
+
+	
+</sqlMap>

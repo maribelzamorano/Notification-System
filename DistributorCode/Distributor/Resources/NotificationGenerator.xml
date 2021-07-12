@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sqlMap
+	namespace="NotificationGenerator"
+		xmlns="http://ibatis.apache.org/mapping"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" >
+
+	<alias>
+		<typeAlias alias="bobjNotificationGenerator" type="com.topdev.aa.data.bobjNotificationGenerator" />
+	</alias>
+
+
+	<parameterMaps>
+		<parameterMap id="params" class="bobjNotificationGenerator" >
+			<parameter property="query"	column="QUERY"/>
+			<parameter property="subscriptionId" column="SBPN_ID" />
+			<parameter property="notificationEventId" column="NFEV_ID"	typeHandler="com.topdev.aa.lib.ibatis.StringToInt"/>
+		</parameterMap>
+	</parameterMaps>
+
+	<statements>
+
+
+		<procedure id="NotificationGenerator.Generate" parameterMap="params" resultClass="string">
+			notifadm.pss_GenerateNotification
+		</procedure>
+		
+	</statements>
+
+</sqlMap>

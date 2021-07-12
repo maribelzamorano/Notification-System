@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" ?> 
+
+<sqlMap 
+	namespace="Notification" 
+		xmlns="http://ibatis.apache.org/mapping"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" >
+
+
+	<alias>
+		<typeAlias alias="bobjNotification" type="com.topdev.aa.data.bobjNotification" />
+	</alias>
+	
+	<resultMaps>
+		<resultMap id="SelectResult" class="bobjNotification">
+			<result property="notificationId" column="NOTF_ID" />
+			<result property="subscriptionId" column="SBPN_CODE" />
+			<result property="notificationInformation" column="NOTF_INFORMATION" />
+			 <result property="notificationIsSent" column="NOTF_ISSENT" />
+		</resultMap>
+	</resultMaps>
+	
+	<parameterMaps>
+		<parameterMap id="params" class="bobjNotification">
+      <parameter property="sessionId"  column="SESSION_ID"/>
+      <parameter property="user"  column="USER" />
+      <parameter property="notificationId" column="NOTF_ID" typeHandler="com.topdev.aa.lib.ibatis.StringToInt"/>
+      <parameter property="orgUser"  column="NFEV_USER" />
+      <parameter property="orgXPts"  column="NFEV_XPTS" />
+      <parameter property="actionCode"  column="AAKT_CODE" />
+      <parameter property="subscriptionId" column="SBPN_CODE" />
+      <parameter property="notificationInformation" column="NOTF_INFORMATION" />
+      <parameter property="notificationIsSent" column="NOTF_ISSENT" />
+      <parameter property="kzUseTransaction"	column="KZ_USE_TRANSACTION"/>
+      <parameter property="debug"	column="DEBUG"/>
+		</parameterMap>
+	</parameterMaps>
+
+	<statements>
+
+		<update id="Notification.MarkAsSent" parameterClass="int" resultMap="SelectResult">
+			update notifadm.IO_NOTIFICATION
+			set NOTF_ISSENT=1
+			where NOTF_ID=#value#
+		</update>
+		
+
+	</statements>
+	
+	
+
+	
+</sqlMap>

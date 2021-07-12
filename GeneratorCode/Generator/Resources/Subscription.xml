@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<sqlMap
+	namespace="Subscription"
+		xmlns="http://ibatis.apache.org/mapping"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" >
+
+
+
+	<alias>
+		<typeAlias alias="bobjSubscription" type="com.topdev.aa.data.bobjSubscription" />
+	</alias>
+
+	<resultMaps>
+		<resultMap id="SelectResult" class="bobjSubscription">
+			<result property="subscriptionId" column="SBPN_ID" />
+			<result property="orgUser"  column="SBPN_USER" />
+			<result property="orgXPts"  column="SBPN_#PTS" />
+			<result property="subscriberId" column="SBER_ID" />
+			<result property="deviceId" column="DEVC_ID" />
+			<result property="subscriptionTypeCode" column="SBTP_CODE" />
+			<result property="subscriptionParameters" column="SBPN_PARAMETERS" />
+		</resultMap>
+		<resultMap id="ProcResult" class="bobjSubscription">
+			<result property="subscriptionId" column="SBPN_ID" typeHandler="com.topdev.aa.lib.ibatis.StringToInt"/>
+		</resultMap>
+	</resultMaps>
+	<parameterMaps>
+		<parameterMap id="params" class="bobjSubscription">
+			<parameter property="sessionId"  column="SESSION_ID"/>
+			<parameter property="user"  column="USER" />
+			<parameter property="subscriptionId" column="SBPN_ID" direction="InputOutput" typeHandler="com.topdev.aa.lib.ibatis.StringToInt"/>
+			<parameter property="orgUser"  column="SBPN_USER" />
+			<parameter property="orgXPts"  column="SBPN_XPTS" />
+			<parameter property="actionCode"  column="AAKT_CODE" />
+			<parameter property="subscriberId" column="SBER_ID"  />
+			<parameter property="deviceId" column="DEVC_ID"  />
+			<parameter property="subscriptionTypeCode" column="SBTP_CODE" />
+			<parameter property="subscriptionParameters" column="SBPN_PARAMETERS" />
+			<parameter property="kzUseTransaction"	column="KZ_USE_TRANSACTION"/>
+			<parameter property="debug"	column="DEBUG"/>
+		</parameterMap>
+	</parameterMaps>
+
+	<statements>
+
+		<select id="SelectBySubscriptionId" parameterClass="int" resultMap="SelectResult">
+			select
+			convert(nvarchar(255),SBPN_ID) as SBPN_ID,
+			convert(nvarchar(255),SBPN_USER) as SBPN_USER,
+			convert(nvarchar(255),SBPN_##PTS) as SBPN_##PTS,
+			convert(nvarchar(255),SBER_ID) as SBER_ID,
+			convert(nvarchar(255),DEVC_ID) as DEVC_ID,
+			convert(nvarchar(255),SBTP_CODE) as SBTP_CODE,
+			SBPN_PARAMETERS
+			from notifadm.T_SUBSCRIPTION
+			<dynamic prepend="WHERE">
+				<isParameterPresent>
+					SBPN_ID=#value#
+				</isParameterPresent>
+			</dynamic>
+		</select>
+
+
+		<select id="SelectBySubscriberId" parameterClass="int" resultMap="SelectResult">
+			select
+			convert(nvarchar(255),SBPN_ID) as SBPN_ID,
+			convert(nvarchar(255),SBPN_USER) as SBPN_USER,
+			convert(nvarchar(255),SBPN_##PTS) as SBPN_##PTS,
+			convert(nvarchar(255),SBER_ID) as SBER_ID,
+			convert(nvarchar(255),DEVC_ID) as DEVC_ID,
+			convert(nvarchar(255),SBTP_CODE) as SBTP_CODE,
+			SBPN_PARAMETERS
+			from notifadm.T_SUBSCRIPTION
+			<dynamic prepend="WHERE">
+				<isParameterPresent>
+					SBER_ID=#value#
+				</isParameterPresent>
+			</dynamic>
+
+		</select>
+
+		<select id="Subscription.Exists" parameterClass="bobjSubscription" resultMap="SelectResult">
+			select
+			convert(nvarchar(255),SBPN_ID) as SBPN_ID,
+			convert(nvarchar(255),SBPN_USER) as SBPN_USER,
+			convert(nvarchar(255),SBPN_##PTS) as SBPN_##PTS,
+			convert(nvarchar(255),SBER_ID) as SBER_ID,
+			convert(nvarchar(255),DEVC_ID) as DEVC_ID,
+			convert(nvarchar(255),SBTP_CODE) as SBTP_CODE,
+			SBPN_PARAMETERS
+			from notifadm.T_SUBSCRIPTION
+			<dynamic prepend="WHERE">
+				<isParameterPresent>
+					SBER_ID=#subscriberId# and
+					DEVC_ID=#deviceId# and
+					SBTP_CODE=#subscriptionTypeCode# and
+					convert(nvarchar(255),SBPN_PARAMETERS)=#subscriptionParameters#
+				</isParameterPresent>
+			</dynamic>
+		</select>
+
+		<procedure id="Subscription.IUDProcedure" parameterMap="params" resultMap="ProcResult">
+			notifadm.pss_SBPN_IUD
+		</procedure>
+	</statements>
+
+
+</sqlMap>

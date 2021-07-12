@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8" ?> 
+
+<sqlMap 
+	namespace="NotificationEvent" 
+		xmlns="http://ibatis.apache.org/mapping"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" >
+
+
+	<alias>
+		<typeAlias alias="bobjNotificationEvent" type="com.topdev.aa.data.bobjNotificationEvent" />
+	</alias>
+	
+	<resultMaps>
+		<resultMap id="SelectResult" class="bobjNotificationEvent">
+			<result property="notificationEventId" column="NFEV_ID" />
+			<result property="eventTypeCode" column="EVTP_CODE" />
+			<result property="eventId" column="NFEV_EVENTID" />
+			<result property="userId" column="USER_ID" />
+			<result property="notificationEventEmailCc" column="NFEV_EMAILCC" />
+			<result property="notificationEventEmailBcc" column="NFEV_EMAILBCC" />
+			<result property="notificationEventInformation" column="NFEV_INFORMATION" />
+			<result property="notificationEventDirectInformation" column="NFEV_DIRECTINFORMATION" />
+			<result property="notificationEventIsRead" column="NFEV_ISREAD" />
+		</resultMap>
+	</resultMaps>
+	
+	<parameterMaps>
+		<parameterMap id="params" class="bobjNotificationEvent">
+			<parameter property="sessionId"  column="SESSION_ID"/>
+			<parameter property="user"  column="USER" />
+			<parameter property="notificationEventId" column="NFEV_ID" typeHandler="com.topdev.aa.lib.ibatis.StringToInt"/>
+			<parameter property="orgUser"  column="NFEV_USER" />
+			<parameter property="orgXPts"  column="NFEV_XPTS" />
+			<parameter property="actionCode"  column="AAKT_CODE" />
+			<parameter property="eventTypeCode" column="EVTP_CODE" />
+			<parameter property="eventId" column="NFEV_EVENTID" />
+			<parameter property="userId" column="USER_ID" />
+			<parameter property="notificationEventEmailCc" column="NFEV_EMAILCC" />
+			<parameter property="notificationEventEmailBcc" column="NFEV_EMAILBCC" />
+			<parameter property="notificationEventInformation" column="NFEV_INFORMATION" />
+			<parameter property="notificationEventDirectInformation" column="NFEV_DIRECTINFORMATION" />
+			<parameter property="notificationEventIsRead" column="NFEV_ISREAD" />
+			<parameter property="kzUseTransaction"	column="KZ_USE_TRANSACTION"/>
+			<parameter property="debug"	column="DEBUG"/>
+		</parameterMap>
+	</parameterMaps>
+
+	<statements>
+
+		<select id="NotificationEvent.Select" parameterClass="int" resultMap="SelectResult">
+			select
+			convert(nvarchar(255),NFEV_ID) as NFEV_ID,
+			convert(nvarchar(255),EVTP_CODE) as EVTP_CODE,
+			convert(nvarchar(255),NFEV_EVENTID) as NFEV_EVENTID,
+			convert(nvarchar(255),USER_ID) as USER_ID,
+			NFEV_EMAILCC,
+			NFEV_EMAILBCC,
+			NFEV_INFORMATION,
+			NFEV_DIRECTINFORMATION,
+			NFEV_ISREAD
+			from notifadm.T_NOTIFICATION_EVENT
+			<dynamic prepend="WHERE">
+				<isParameterPresent>
+          NFEV_ID=#value#
+        </isParameterPresent>
+			</dynamic>
+	
+		</select>
+
+    <select id="NotificationEvent.SelectNew" resultMap="SelectResult">
+		select
+		convert(nvarchar(255),NFEV_ID) as NFEV_ID,
+		convert(nvarchar(255),EVTP_CODE) as EVTP_CODE,
+		convert(nvarchar(255),NFEV_EVENTID) as NFEV_EVENTID,
+		convert(nvarchar(255),USER_ID) as USER_ID,
+		NFEV_EMAILCC,
+		NFEV_EMAILBCC,
+		NFEV_INFORMATION,
+		NFEV_DIRECTINFORMATION,
+		convert(nvarchar(255),NFEV_ISREAD) as NFEV_ISREAD
+		from notifadm.T_NOTIFICATION_EVENT
+		where NFEV_ISREAD=0
+	</select>
+
+    <update id="NotificationEvent.MarkAsRead" parameterClass="int">
+		update notifadm.IO_NOTIFICATION_EVENT
+		set NFEV_ISREAD=1
+		where NFEV_ID=#value#
+	</update>
+    
+
+		<procedure id="NotificationEvent.IUDProcedure" parameterMap="params" >
+			notifadm.pss_NFEV_IUD
+		</procedure>
+	</statements>
+
+	
+</sqlMap>

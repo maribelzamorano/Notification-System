@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?> 
+
+<sqlMap 
+	namespace="Notification" 
+		xmlns="http://ibatis.apache.org/mapping"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" >
+
+
+	<alias>
+		<typeAlias alias="bobjNotification" type="com.topdev.aa.data.bobjNotification" />
+	</alias>
+
+	<statements>
+		<update id="Notification.MarkAsSent" parameterClass="int">
+			update notifadm.IO_NOTIFICATION
+			set NOTF_ISSENT=1
+			where NOTF_ID=#value#
+		</update>
+	</statements>
+	
+</sqlMap>

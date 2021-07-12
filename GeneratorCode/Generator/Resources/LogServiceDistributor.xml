@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<sqlMap
+	namespace="LogServiceDistributor"
+		xmlns="http://ibatis.apache.org/mapping"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" >
+
+
+	<alias>
+		<typeAlias alias="bobjLogServiceDistributor" type="com.topdev.aa.data.bobjLogServiceDistributor" />
+	</alias>
+
+	<resultMaps>
+		<resultMap id="SelectResult" class="bobjLogServiceDistributor">
+			<result property="logServiceDistributorId" column="LSDI_ID" />
+			<result property="logServiceDistributorStartTime" column="LSDI_STARTTIME" />
+			<result property="logServiceDistributorEndTime" column="LSDI_ENDTIME" />
+			<result property="logServiceDistributorRc" column="LSDI_RC" />
+			<result property="logServiceDistributorRcText" column="LSDI_RC_TEXT" />
+		</resultMap>
+	</resultMaps>
+
+	<parameterMaps>
+		<parameterMap id="params" class="bobjLogServiceDistributor">
+			<parameter property="sessionId"  column="SESSION_ID"/>
+			<parameter property="user"  column="USER" />
+			<parameter property="logServiceDistributorId" column="LSDI_ID" typeHandler="com.topdev.aa.lib.ibatis.StringToInt"/>
+			<parameter property="orgUser"  column="LSDI_USER" />
+			<parameter property="orgXPts"  column="LSDI_XPTS" />
+			<parameter property="actionCode"  column="AAKT_CODE" />
+			<parameter property="logServiceDistributorStartTime" column="LSDI_STARTTIME" />
+			<parameter property="logServiceDistributorEndTime" column="LSDI_ENDTIME" />
+			<parameter property="logServiceDistributorRc" column="LSDI_RC" />
+			<parameter property="logServiceDistributorRcText" column="LSDI_RC_TEXT" />
+			<parameter property="kzUseTransaction"	column="KZ_USE_TRANSACTION"/>
+			<parameter property="debug"	column="DEBUG"/>
+		</parameterMap>
+	</parameterMaps>
+
+	<statements>
+
+		<select id="LogServiceDistributor.Select" parameterClass="int" resultMap="SelectResult">
+			select
+			convert(nvarchar(255),LSDI_ID) as LSDI_ID,
+			convert(nvarchar(255),LSDI_STARTTIME) LSDI_STARTTIME,
+			convert(nvarchar(255),LSDI_ENDTIME) LSDI_ENDTIME,
+			convert(nvarchar(255),LSDI_RC) LSDI_RC,
+			LSDI_RC_TEXT
+			from notifadm.T_LOGSERVICEDISTRIBUTOR
+			<dynamic prepend="WHERE">
+				<isParameterPresent>
+					LSDI_ID=#value#
+				</isParameterPresent>
+			</dynamic>
+
+		</select>
+
+
+		<procedure id="LogServiceDistributor.IUDProcedure" parameterMap="params" >
+			notifadm.pss_LSDI_IUD
+		</procedure>
+	</statements>
+
+
+</sqlMap>

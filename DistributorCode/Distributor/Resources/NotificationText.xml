@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sqlMap namespace="NotificationText"
+		xmlns="http://ibatis.apache.org/mapping"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" >
+
+	<alias>
+		<typeAlias alias="bobjNotificationText" type="com.topdev.aa.data.bobjNotificationText" />
+	</alias>
+
+	<resultMaps>
+		<resultMap id="SelectResult" class="bobjNotificationText">
+			<result property="notificationTextId"		column="NOTX_ID" />
+			<result property="subscriptionTypeCode"		column="SBTP_CODE" />
+			<result property="communicationMethodCode"  column="CMMD_CODE" />
+			<result property="notificationTextText"		column="NOTX_TEXT" />
+		</resultMap>
+	</resultMaps>
+
+	<parameterMaps>
+		<parameterMap id="params" class="bobjNotificationText" >
+			<parameter property="sessionId"					column="SESSION_ID"/>
+			<parameter property="user"						column="USER"/>
+			<parameter property="notificationTextId"		column="NOTX_ID" />
+			<parameter property="subscriptionTypeCode"		column="SBTP_CODE" />
+			<parameter property="communicationMethodCode"	column="CMMD_CODE" />
+			<parameter property="notificationTextText"		column="NOTX_TEXT" />
+			<parameter property="kzUseTransaction"			column="KZ_USE_TRANSACTION"/>
+			<parameter property="debug"						column="DEBUG"/>
+		</parameterMap>
+	</parameterMaps>
+
+	<statements>
+
+		<select id="NotificationText.Select" resultMap="SelectResult">
+			select
+			convert(nvarchar(255),NOTX_ID) NOTX_ID,
+			convert(nvarchar(255),SBTP_CODE) SBTP_CODE,
+			convert(nvarchar(255),CMMD_CODE) CMMD_CODE,
+			NOTX_TEXT
+			from notifadm.T_NOTIFICATION_TEXT
+			<dynamic prepend="WHERE">
+				<isParameterPresent>
+					NOTX_ID = #value#
+				</isParameterPresent>
+			</dynamic>
+		</select>
+		<select id="NotificationText.SelectbySubscriptionType" resultClass="bobjNotificationText">
+			select
+			NOTX_TEXT as notificationTextText
+			from notifadm.T_NOTIFICATION_TEXT
+			<dynamic prepend="WHERE">
+				<isParameterPresent>
+					SBTP_CODE = #value#
+				</isParameterPresent>
+			</dynamic>
+		</select>
+
+		<procedure id="NotificationText.IUDProcedure" parameterMap="params">
+			notifadm.pss_NOTX_IUD
+		</procedure>
+
+
+	</statements>
+
+</sqlMap>

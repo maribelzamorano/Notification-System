@@ -1,0 +1,39 @@
+﻿Installing assembly 'C:\Users\Renato\Desktop\Notifications\Generator\Generator\bin\Debug\Generator.exe'.
+Affected parameters are:
+   logtoconsole = 
+   assemblypath = C:\Users\Renato\Desktop\Notifications\Generator\Generator\bin\Debug\Generator.exe
+   logfile = C:\Users\Renato\Desktop\Notifications\Generator\Generator\bin\Debug\Generator.InstallLog
+Installing service Service1...
+Creating EventLog source Service1 in log Application...
+Rolling back assembly 'C:\Users\Renato\Desktop\Notifications\Generator\Generator\bin\Debug\Generator.exe'.
+Affected parameters are:
+   logtoconsole = 
+   assemblypath = C:\Users\Renato\Desktop\Notifications\Generator\Generator\bin\Debug\Generator.exe
+   logfile = C:\Users\Renato\Desktop\Notifications\Generator\Generator\bin\Debug\Generator.InstallLog
+Restoring event log to previous state for source Service1.
+Installing assembly 'C:\Users\Renato\Desktop\Notifications\Generator\Generator\bin\Debug\Generator.exe'.
+Affected parameters are:
+   logtoconsole = 
+   assemblypath = C:\Users\Renato\Desktop\Notifications\Generator\Generator\bin\Debug\Generator.exe
+   logfile = C:\Users\Renato\Desktop\Notifications\Generator\Generator\bin\Debug\Generator.InstallLog
+Installing service Service1...
+Creating EventLog source Service1 in log Application...
+Rolling back assembly 'C:\Users\Renato\Desktop\Notifications\Generator\Generator\bin\Debug\Generator.exe'.
+Affected parameters are:
+   logtoconsole = 
+   assemblypath = C:\Users\Renato\Desktop\Notifications\Generator\Generator\bin\Debug\Generator.exe
+   logfile = C:\Users\Renato\Desktop\Notifications\Generator\Generator\bin\Debug\Generator.InstallLog
+Restoring event log to previous state for source Service1.
+Installing assembly 'C:\Users\Renato\Desktop\Notifications\Generator\Generator\bin\Debug\Generator.exe'.
+Affected parameters are:
+   logtoconsole = 
+   assemblypath = C:\Users\Renato\Desktop\Notifications\Generator\Generator\bin\Debug\Generator.exe
+   logfile = C:\Users\Renato\Desktop\Notifications\Generator\Generator\bin\Debug\Generator.InstallLog
+Installing service Service1...
+Creating EventLog source Service1 in log Application...
+Rolling back assembly 'C:\Users\Renato\Desktop\Notifications\Generator\Generator\bin\Debug\Generator.exe'.
+Affected parameters are:
+   logtoconsole = 
+   assemblypath = C:\Users\Renato\Desktop\Notifications\Generator\Generator\bin\Debug\Generator.exe
+   logfile = C:\Users\Renato\Desktop\Notifications\Generator\Generator\bin\Debug\Generator.InstallLog
+Restoring event log to previous state for source Service1.

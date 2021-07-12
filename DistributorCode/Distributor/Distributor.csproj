@@ -1,0 +1,191 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{E9EDCFB6-5AD8-40C4-8659-B019297E00E8}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Distributor</RootNamespace>
+    <AssemblyName>Distributor</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug2|AnyCPU' ">
+    <OutputPath>bin\Debug2\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug4|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Debug4\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="IBatisNet.Common, Version=1.6.2.0, Culture=neutral, PublicKeyToken=ed781d9fc396c6ca, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\Desktop\residencias#\Notifications\ibatis\Ibatis.DataMapper.1.6.2.bin\IBatisNet.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="IBatisNet.DataMapper, Version=1.6.2.0, Culture=neutral, PublicKeyToken=ed781d9fc396c6ca, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\Desktop\residencias#\Notifications\ibatis\Ibatis.DataMapper.1.6.2.bin\IBatisNet.DataMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration.Install" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Management" />
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.ServiceProcess" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Distributor.cs" />
+    <Compile Include="Ibatis Components\ActionCode.cs" />
+    <Compile Include="Ibatis Components\ArcBusinessObject.cs" />
+    <Compile Include="Ibatis Components\AttachmentsHelper.cs" />
+    <Compile Include="Ibatis Components\bobjAttachments.cs" />
+    <Compile Include="Ibatis Components\bobjCommunicationMethod.cs" />
+    <Compile Include="Ibatis Components\bobjDevice.cs" />
+    <Compile Include="Ibatis Components\bobjEventSubscriptionType.cs" />
+    <Compile Include="Ibatis Components\bobjEventType.cs" />
+    <Compile Include="Ibatis Components\bobjLogServiceDistributor.cs" />
+    <Compile Include="Ibatis Components\bobjLogServiceGenerator.cs" />
+    <Compile Include="Ibatis Components\bobjNotification.cs" />
+    <Compile Include="Ibatis Components\bobjNotificationEvent.cs" />
+    <Compile Include="Ibatis Components\bobjNotificationGenerator.cs" />
+    <Compile Include="Ibatis Components\bobjNotificationInformation.cs" />
+    <Compile Include="Ibatis Components\bobjNotificationText.cs" />
+    <Compile Include="Ibatis Components\BobjStandard.cs" />
+    <Compile Include="Ibatis Components\bobjSubscriber.cs" />
+    <Compile Include="Ibatis Components\bobjSubscription.cs" />
+    <Compile Include="Ibatis Components\bobjSubscriptionInformation.cs" />
+    <Compile Include="Ibatis Components\bobjSubscriptionType.cs" />
+    <Compile Include="Ibatis Components\CommunicationMethodHelper.cs" />
+    <Compile Include="Ibatis Components\DeviceHelper.cs" />
+    <Compile Include="Ibatis Components\EventSubscriptionTypeHelper.cs" />
+    <Compile Include="Ibatis Components\EventTypeHelper.cs" />
+    <Compile Include="Ibatis Components\Helper.cs" />
+    <Compile Include="Ibatis Components\Helpers.cs" />
+    <Compile Include="Ibatis Components\LogServiceDistributorHelper.cs" />
+    <Compile Include="Ibatis Components\LogServiceGeneratorHelper.cs" />
+    <Compile Include="Ibatis Components\NotificationEventHelper.cs" />
+    <Compile Include="Ibatis Components\NotificationGeneratorHelper.cs" />
+    <Compile Include="Ibatis Components\NotificationHelper.cs" />
+    <Compile Include="Ibatis Components\NotificationInformationHelper.cs" />
+    <Compile Include="Ibatis Components\NotificationTextHelper.cs" />
+    <Compile Include="Ibatis Components\ProcessingError.cs" />
+    <Compile Include="Ibatis Components\StringToInt.cs" />
+    <Compile Include="Ibatis Components\SubscriberHelper.cs" />
+    <Compile Include="Ibatis Components\SubscriptionHelper.cs" />
+    <Compile Include="Ibatis Components\SubscriptionInformationHelper.cs" />
+    <Compile Include="Ibatis Components\SubscriptionTypeHelper.cs" />
+    <Compile Include="Ibatis Components\SystemEinstellungen.cs" />
+    <Compile Include="Ibatis Components\ValidationError.cs" />
+    <Compile Include="ProjectInstaller.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ProjectInstaller.Designer.cs">
+      <DependentUpon>ProjectInstaller.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DistributorService.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="DistributorService.Designer.cs">
+      <DependentUpon>DistributorService.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="ServiceLogging.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="bin\Debug\Distributor.exe.config" />
+    <None Include="bin\Debug\Distributor.vshost.exe.config" />
+    <None Include="bin\Debug\properties.config" />
+    <None Include="bin\Debug\providers.config" />
+    <None Include="Ibatis Components\properties.config" />
+    <None Include="Ibatis Components\providers.config" />
+    <None Include="bin\Debug\sqlmap.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="bin\Debug\Castle.DynamicProxy.dll" />
+    <Content Include="bin\Debug\DIRECT.xslt" />
+    <Content Include="bin\Debug\Distributor.exe" />
+    <Content Include="bin\Debug\Distributor.pdb" />
+    <Content Include="bin\Debug\Distributor.vshost.exe" />
+    <Content Include="bin\Debug\IBatisNet.Common.dll" />
+    <Content Include="bin\Debug\IBatisNet.Common.xml" />
+    <Content Include="bin\Debug\IBatisNet.DataMapper.dll" />
+    <Content Include="bin\Debug\IBatisNet.DataMapper.xml" />
+    <Content Include="Resources\Attachments.xml" />
+    <Content Include="Resources\CommunicationMethod.xml" />
+    <Content Include="Resources\Device.xml" />
+    <Content Include="Resources\EventSubscriptionType.xml" />
+    <Content Include="Resources\EventType.xml" />
+    <Content Include="Resources\LogServiceDistributor.xml" />
+    <Content Include="Resources\LogServiceGenerator.xml" />
+    <Content Include="Resources\Notification.xml" />
+    <Content Include="Resources\NotificationEvent.xml" />
+    <Content Include="Resources\NotificationGenerator.xml" />
+    <Content Include="Resources\NotificationInformation.xml" />
+    <Content Include="Resources\NotificationText.xml" />
+    <Content Include="Resources\Subscriber.xml" />
+    <Content Include="Resources\Subscription.xml" />
+    <Content Include="Resources\SubscriptionInformation.xml" />
+    <Content Include="Resources\SubscriptionType.xml" />
+    <Content Include="Resources\SystemEinstellungen.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ProjectInstaller.resx">
+      <DependentUpon>ProjectInstaller.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DistributorService.resx">
+      <DependentUpon>DistributorService.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
